@@ -4600,7 +4600,7 @@ select.currencies {
   padding-top: 0;
   padding-bottom: 0;
   cursor: pointer;
-  background-image: url(//harolds-bags.com/cdn/shop/t/19/assets/select.png?v=163443801653745187891645567577);
+  background-image: url(//harolds-bags.com/cdn/shop/t/29/assets/select.png?v=163443801653745187891725884007);
 }
 @media only screen and (max-width: 798px) {
   select.currencies {
@@ -7152,7 +7152,7 @@ select::-ms-expand {
 }
 
 select {
-  background: #fff url(//harolds-bags.com/cdn/shop/t/19/assets/select.png?v=163443801653745187891645567577) no-repeat 96% 50%;
+  background: #fff url(//harolds-bags.com/cdn/shop/t/29/assets/select.png?v=163443801653745187891725884007) no-repeat 96% 50%;
   background-size: 18px 12px;
   border: 1px solid #d9dbdc;
   -webkit-appearance: none;
@@ -9666,7 +9666,7 @@ a.tag,
   height: 0;
   width: 0;
   transition: all 0.3s linear;
-  background: url(//harolds-bags.com/cdn/shop/t/19/assets/loader.gif) center center no-repeat;
+  background: url(//harolds-bags.com/cdn/shop/t/29/assets/loader.gif) center center no-repeat;
   background-size: 32px 32px;
   margin: 0 auto;
 }
@@ -14390,8 +14390,8 @@ h2 {
 }
 @font-face {
   font-family: "turbo";
-  src: url(//harolds-bags.com/cdn/shop/t/19/assets/turbo.eot?v=48734892740725754481645567583);
-  src: url(//harolds-bags.com/cdn/shop/t/19/assets/turbo.eot?v=48734892740725754481645567583) format("embedded-opentype"), url(//harolds-bags.com/cdn/shop/t/19/assets/turbo.woff?v=150966577236684244781645567585) format("woff"), url(//harolds-bags.com/cdn/shop/t/19/assets/turbo.ttf?v=77481909974496710951645567585) format("truetype"), url(//harolds-bags.com/cdn/shop/t/19/assets/turbo.svg?v=173366358466109711321645567584) format("svg");
+  src: url(//harolds-bags.com/cdn/shop/t/29/assets/turbo.eot?v=48734892740725754481725884007);
+  src: url(//harolds-bags.com/cdn/shop/t/29/assets/turbo.eot?v=48734892740725754481725884007) format("embedded-opentype"), url(//harolds-bags.com/cdn/shop/t/29/assets/turbo.woff?v=150966577236684244781725884007) format("woff"), url(//harolds-bags.com/cdn/shop/t/29/assets/turbo.ttf?v=77481909974496710951725884007) format("truetype"), url(//harolds-bags.com/cdn/shop/t/29/assets/turbo.svg?v=173366358466109711321725884007) format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

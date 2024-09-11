@@ -2,14 +2,15 @@
 !doctype html>
 <html class="no-js no-touch" lang="{{ shop.locale }}">
   <head>
-{% include "load-metafields" %}
+    {% render 'wnw-header' %}
+    {% include "load-metafields" %}
       <style>
-    @media (min-width: 768px) {
-    .product-media-container .media { height: 480px; }
-    .product__media-list video {
-        object-fit: cover;
-    }
-    }
+          @media (min-width: 768px) {
+              .product-media-container .media { height: 480px; }
+              .product__media-list video {
+                  object-fit: cover;
+              }
+          }
     </style>
 
     <meta name="seobility" content="a1d01034e2f1b7b89602009abee50c8e">
@@ -50,7 +51,8 @@
       <link rel="preconnect" href="https://productreviews.shopifycdn.com" />
       <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com" />
     {% endif %}
-
+    
+{% comment %}
     <!-- Preload Assets -->
     <link rel="preload" href="{{ 'fancybox.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
@@ -61,14 +63,14 @@
     <link rel="preload" href="{{ 'utilities.js' | asset_url }}" as="script">
     <link rel="preload" href="{{ 'app.js' | asset_url }}" as="script">
     <link rel="preload" href="{{ 'custom.js' | asset_url }}" as="script">
-
+{% endcomment %}
     <!-- Stylesheet for Fancybox library -->
     {{ 'fancybox.css' | asset_url | stylesheet_tag }}
 
     <!-- Stylesheets for Turbo -->
     {{ 'styles.css' | asset_url | stylesheet_tag }}
 
-    <script>
+    <script type="lazyload_ext">
       window.lazySizesConfig = window.lazySizesConfig || {};
 
       lazySizesConfig.expand = 300;
@@ -112,27 +114,24 @@
       <link rel="canonical" href="{{ canonical_url }}"/>
     {% endif %}
 
-    
-    
-    
-    
-    
-    
-    
-
     {% if template contains 'customer' %}
       <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
       <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
     {% endif %}
-
-    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    
+    {% if template contains 'cart'  %}
+      <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    {% else %}
+      <script type="lazyload_int" data-src="{{ 'jquery.min.js' | asset_url }}"></script>
+    {% endif %}
+    
 
     {% if settings.show_multiple_currencies or settings.show_shipping_calculator %}
-      <script type="text/javascript" src="/services/javascripts/currencies.js" data-no-instant></script>
+      <script type="lazyload_int" data-src="/services/javascripts/currencies.js" data-no-instant></script>
     {% endif %}
 
     {% if settings.show_multiple_currencies or shop.enabled_currencies.size > 1 %}
-      <script src="{{ 'currencies.js' | asset_url }}" defer></script>
+      <script type="lazyload_int" data-src="{{ 'currencies.js' | asset_url }}" ></script>
     {% endif %}
 
     {% comment %}Inject theme-object begin{% endcomment %}
@@ -173,10 +172,12 @@
       {% render 'js-variables' %}
     </script>
 
-    <script src="{{ 'vendors.js' | asset_url }}" defer></script>
-    <script src="{{ 'sections.js' | asset_url }}" defer></script>
-    <script src="{{ 'utilities.js' | asset_url }}" defer></script>
-    <script src="{{ 'app.js' | asset_url }}" defer></script>
+    <script type="lazyload_int" data-src="{{ 'vendors.js' | asset_url }}" ></script>
+    <script type="lazyload_int" data-src="{{ 'sections.js' | asset_url }}" ></script>
+    <script type="lazyload_int" data-src="{{ 'utilities.js' | asset_url }}" ></script>
+    <script type="lazyload_int" data-src="{{ 'app.js' | asset_url }}" ></script>
+
+
 
     {% if settings.disqus_enabled %}
       {% if template contains "blog" or template contains "article" or template contains "index" %}
@@ -224,7 +225,15 @@
       {{ settings.custom_scripts }}
     </script>
 
-    {{ content_for_header }}
+    {%- if request.design_mode or template contains 'cart' or template contains 'checkout' or canonical_url contains '/pages/store-locator'  -%}
+      {{ content_for_header }}
+    {%- else -%}
+        {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+        {{ content_for_header2 | replace: ' async="async" ', ' type="lazyload_int" ' | replace: ' defer="defer" ', ' type="lazyload_int" ' | replace: " src=", " data-src="| replace: "DOMContentLoaded", "w3-DOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('w3-DOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('w3-DOMContentLoaded', prefetchAssets);" }}
+        <script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
+    {%- endif -%}
+
+
     {{ 'bold-csp-custom.css' | asset_url | stylesheet_tag }}
 
     {% render 'social-meta-info' %}
@@ -233,10 +242,13 @@
     {% if collection.next_product %}<link rel="next" href="{{ collection.next_product }}">{% endif %}
  
 {% render 'judgeme_core' %}
-      {% render 'weglot_hreftags' %}
+{% comment %}
+{% render 'weglot_hreftags' %}
 {% render 'weglot_switcher' %}
+{% endcomment %}
   
-
+{% render 'app-block' %}
+{% render 'custom-css' %}
 </head>
 
 
@@ -287,7 +299,7 @@
 
   </noscript>
 
-  <body class="{% if template == '404' %}error-404{% else %}{{ template | replace: '.', '-' | handle }}{% endif %}"
+  <body class="template-{{ template.name }} {% if template == '404' %}error-404{% else %}{{ template | replace: '.', '-' | handle }}{% endif %}"
         data-money-format="
           {%- if settings.currency_format == 'money_with_currency_format' -%}
             {{- shop.money_with_currency_format | strip_html -}}
@@ -362,9 +374,7 @@
     {% endif %}
 
   
-{% include "bc_banner" %}
-
-  
+  {% include "bc_banner" %} 
   {% render 'bold-pr' %}
        <style>
       .jdgm-prev-badge[data-average-rating='0.00']{display :block !important;}
@@ -382,8 +392,14 @@
     document.querySelector(".jdgm-carousel-number-of-reviews").innerHTML = "from " + carReviews  + " reviews"
     }}, 800);
     })
+     if (window.location.href.indexOf('en.harolds-bags.com') < 0) {
+          document.querySelector(".jdgm-carousel-title").innerText = "Lassen Sie Kunden für uns sprechen";
+      }
   </script>
    {%- endif -%}
+
+    {% render 'app-block-footer' %}
+   {% render 'wnw-footer' %}
     
   </body>
 </html>

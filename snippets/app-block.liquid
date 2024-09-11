@@ -1,0 +1,102 @@
+<!-- BEGIN app block: shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507 -->
+  <script type="lazyload_int" data-src="https://static.klaviyo.com/onsite/js/XVfYiL/klaviyo.js?company_id=XVfYiL"></script>
+  <script type="lazyload_int">!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
+  {% if template contains 'product' %}
+  <script id="viewed_product" type="lazyload_int">
+      if (item == null) {
+          var _learnq = _learnq || [];
+          var item = {
+              Name: {{ product.title | json }},
+              ProductID: {{ product.id | json }},            
+              Categories: {{ product.collections | map: 'title' | json }},
+              ImageURL: "https:{{ product.featured_image.src | img_url: 'grande' }}",
+              URL: "{{ shop.secure_url }}{{ product.url }}",
+              Brand: {{ product.vendor | json }},
+              Price: {{ product.price | money | json }},
+              CompareAtPrice: {{ product.compare_at_price_max | money | json }}
+          };
+          _learnq.push(['track', 'Viewed Product', item]);
+          _learnq.push(['trackViewedItem', {
+              Title: item.Name,
+              ItemId: item.ProductID,
+              Categories: item.Categories,
+              ImageUrl: item.ImageURL,
+              Url: item.URL,
+              Metadata: {
+                  Brand: item.Brand,
+                  Price: item.Price,
+                  CompareAtPrice: item.CompareAtPrice
+              }
+          }]);
+      }
+  </script>
+  {% endif %}
+  <script>
+    window.klaviyoReviewsProductDesignMode = false
+  </script>
+<!-- END app app block -->
+
+
+<!-- BEGIN app block: shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8 --><!-- Start of Judge.me Core -->
+<link rel="dns-prefetch" href="https://cdn.judge.me/">
+{{ shop.metafields.judgeme.settings | replace: '<script data-cfasync="false" type="text/javascript" async src="', '<script data-cfasync="false" type="lazyload_int" data-src="' | replace: 'type="text/css" media="nope!" onload="this.media=', '' | replace: "'all'", "" | replace: '" href="', 'data-href="' }}
+{% for count in (0..5) %}
+  {% assign metafield_key = 'html_miracle_' | append: count %}
+  {% assign current_metafield = shop.metafields.judgeme[metafield_key] %}
+  {% unless current_metafield %} {% break %} {% endunless %}
+  {{ current_metafield }}
+{% endfor %}
+<script data-cfasync='false' class='jdgm-script' type="lazyload_int">
+!function(e){window.jdgm=window.jdgm||{},jdgm.CDN_HOST="https://cdn.judge.me/",
+jdgm.docReady=function(d){(e.attachEvent?"complete"===e.readyState:"loading"!==e.readyState)?
+setTimeout(d,0):e.addEventListener("DOMContentLoaded",d)},jdgm.loadCSS=function(d,t,o,s){
+!o&&jdgm.loadCSS.requestedUrls.indexOf(d)>=0||(jdgm.loadCSS.requestedUrls.push(d),
+(s=e.createElement("link")).rel="stylesheet",s.class="jdgm-stylesheet",s.media="nope!",
+s.href=d,s.onload=function(){this.media="all",t&&setTimeout(t)},e.body.appendChild(s))},
+jdgm.loadCSS.requestedUrls=[],jdgm.loadJS=function(e,d){var t=new XMLHttpRequest;
+t.onreadystatechange=function(){4===t.readyState&&(Function(t.response)(),d&&d(t.response))},
+t.open("GET",e),t.send()},jdgm.docReady((function(){(window.jdgmLoadCSS||e.querySelectorAll(
+".jdgm-widget, .jdgm-all-reviews-page").length>0)&&(jdgmSettings.widget_load_with_code_splitting?
+parseFloat(jdgmSettings.widget_version)>=3?jdgm.loadCSS(jdgm.CDN_HOST+"widget_v3/base.css"):
+jdgm.loadCSS(jdgm.CDN_HOST+"widget/base.css"):jdgm.loadCSS(jdgm.CDN_HOST+"shopify_v2.css"),
+jdgm.loadJS(jdgm.CDN_HOST+"loader.js"))}))}(document);
+</script>
+<noscript><link rel="stylesheet" type="text/css" media="all" href="https://cdn.judge.me/shopify_v2.css"></noscript>
+
+<!-- BEGIN app snippet: theme_fix_tags --><script type="lazyload_int">
+  (function() {
+    var jdgmThemeFixes = null;
+    if (!jdgmThemeFixes) return;
+    var thisThemeFix = jdgmThemeFixes[Shopify.theme.id];
+    if (!thisThemeFix) return;
+
+    if (thisThemeFix.html) {
+      document.addEventListener("DOMContentLoaded", function() {
+        var htmlDiv = document.createElement('div');
+        htmlDiv.classList.add('jdgm-theme-fix-html');
+        htmlDiv.innerHTML = thisThemeFix.html;
+        document.body.append(htmlDiv);
+      });
+    };
+
+    if (thisThemeFix.css) {
+      var styleTag = document.createElement('style');
+      styleTag.classList.add('jdgm-theme-fix-style');
+      styleTag.innerHTML = thisThemeFix.css;
+      document.head.append(styleTag);
+    };
+
+    if (thisThemeFix.js) {
+      var scriptTag = document.createElement('script');
+      scriptTag.classList.add('jdgm-theme-fix-script');
+      scriptTag.innerHTML = thisThemeFix.js;
+      document.head.append(scriptTag);
+    };
+  })();
+</script>
+<!-- END app snippet -->
+<!-- End of Judge.me Core -->
+<!-- END app app block -->
+
+
+<script type="lazyload_int" data-src="https://cdn.shopify.com/extensions/1eceb097-d2ad-4714-bdfd-0cb5cbd7c3f8/pushowl-brevo-16/assets/pushowl-shopify.js"></script>

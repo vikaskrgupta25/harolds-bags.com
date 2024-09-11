@@ -25,11 +25,11 @@
             <div class="text-align--{{block.settings.text_align}}">
               {% if block.settings.image %}
                 <img alt="{{ block.settings.image.alt | escape }}"
-                     class="footer-logo lazyload {{ settings.image_loading_style }}"
+                     class="footer-logo lazyloaded {{ settings.image_loading_style }}"
                      data-sizes="25vw"
                      style="max-width: {{- block.settings.image.width -}}px"
-                     data-src="{{ block.settings.image | img_url: '2048x' }}"
-                     data-srcset="{{ block.settings.image | img_url: '200x' }} 200w,
+                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ block.settings.image | img_url: '2048x' }}"
+                     datalate-srcset="{{ block.settings.image | img_url: '200x' }} 200w,
                                   {{ block.settings.image | img_url: '300x' }} 300w,
                                   {{ block.settings.image | img_url: '400x' }} 400w,
                                   {{ block.settings.image | img_url: '500x' }} 500w,

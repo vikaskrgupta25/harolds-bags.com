@@ -3,13 +3,13 @@
 
 {% if data.size > 0 and cookieData._bc_c_set.live == '1' and content_for_header contains 'app.gdpr-legal-cookie.com\/get-script.php' %}
 
-    <script>
+    <script type="lazyload_int">
         if (typeof BC_JSON_ObjectBypass === "undefined"){
             var BC_JSON_ObjectBypass = {{ cookieData | json }};
         }
 
     </script>
-    <script>
+    <script type="lazyload_int">
         const data_gdpr_legal_banner_content = {{ data.bc_cookie_banner_main | json }};
     </script>
     <style>

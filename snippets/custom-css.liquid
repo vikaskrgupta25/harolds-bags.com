@@ -1,0 +1,86 @@
+<style>
+.transition--fade-in {
+    transition: none !important;
+}
+.product_gallery {
+    opacity: 1;
+}
+.template-product .product_section .product_gallery:not(.flickity-enabled) .gallery-cell{
+display:none;
+}
+.template-product .product_section .product_gallery:not(.flickity-enabled) .gallery-cell.isShow{
+display:block;
+}
+body .jdgm-prev-badge[data-average-rating='0.00'] {
+    display: none !important;
+}
+.jdgm-star {
+    color: #e9a350;
+}
+.jdgm-ask-question-btn, .jdgm-write-rev-link, .jdgm-all-reviews-rating-wrapper, .jdgm-carousel-wrapper a, .jdgm-rev__prod-link, .jdgm-all-reviews-text a, .jdgm-carousel-item__product, .jdgm-carousel-number-of-reviews, .jdgm-revs-tab__url {
+    color: rgb(233, 163, 80);
+}
+body.template-product.product-details .product_gallery_nav.product-gallery__thumbnails:not(.flickity-enabled) .gallery-cell.product-gallery__thumbnail:nth-child(n+6) {
+    display:none
+}
+
+html:not(.jsload) .money[data-product-id], 
+html:not(.jsload) .money[data-product-handle], 
+html:not(.jsload) .money[data-variant-id], 
+html:not(.jsload) .money[data-line-index], 
+html:not(.jsload) .money[data-cart-total] {
+    animation: none !important;
+    visibility: visible !important;
+}
+html:not(.jsload) body.template-product .shopify-product-form .select select {
+    display:none
+}
+html:not(.jsload) body.template-product .product-block .modal_price {
+    padding-bottom:0px;
+    margin-bottom:0px
+}
+html:not(.jsload) body.template-product .modal_price span.compare-at-price ,
+html:not(.jsload) body.template-product .modal_price span.sale.savings{
+    display:none
+}
+@media(max-width:767px){
+html:not(.w3_start) body.template-index .section .banner .image-element__wrap img{
+    height: 193.05px;
+}
+html:not(.jsload) #pagecontent {
+        display: block;
+        padding-top: 40px;
+}
+body.template-index  section.section.is-width-standard .container.image-with-text-container img {
+    min-width:359px
+}
+html:not(.w3_start) body.template-page.page-details-2 .container .image-element__wrap {
+    max-height:169px;
+}
+body.template-product.product-details .product_gallery_nav.product-gallery__thumbnails:not(.flickity-enabled) .gallery-cell.product-gallery__thumbnail {min-width: 19.0vw;}
+body.template-product.product-details .product_gallery_nav:not(.flickity-enabled) {
+    display: flex;
+    transform: translateX(-5.9%);
+}
+body.template-product.product-details .gallery-wrap.gallery-thumbnails--bottom {
+    overflow: hidden;
+}
+
+}
+
+@media(min-width:1200px){
+html:not(.w3_start) body.template-index .section .banner .image-element__wrap {
+    min-width: 948px;
+    max-height: 948.41px;
+}
+  body.template-product.product-details .product_gallery_nav.product-gallery__thumbnails:not(.flickity-enabled) .gallery-cell.product-gallery__thumbnail {min-width: 140px;}
+body.template-product.product-details .product_gallery_nav:not(.flickity-enabled) {
+    display: flex;
+    transform: translateX(-3%);
+}
+body.template-product.product-details .gallery-wrap.gallery-thumbnails--bottom {
+    overflow: hidden;
+}
+}
+
+</style> 

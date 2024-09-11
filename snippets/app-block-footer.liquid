@@ -1,0 +1,103 @@
+<div id="shopify-block-6610233760104865948" class="shopify-block shopify-app-block"><script>
+  window.pushowlSubdomain = "harolds-bags.myshopify.com".split(".")[0]
+  window.isPushowlThemeAppExtentionEnabled = true
+  window.pushowlGUID = "4f09f936-646e-4d4a-ba24-9fc019b723d1"
+  window.pushowlEnvironment = "production"
+</script>
+</div>
+
+<script type="lazyload_int">
+    document.addEventListener('DOMContentLoaded', function () {
+        setInterval(function() {
+            var images = document.querySelectorAll('img[datalate-srcset][data-done="Loaded"]');
+            if(images){
+            images.forEach(function (img) {
+                    var dataSrcsetValue = img.getAttribute('datalate-srcset');
+                    img.setAttribute('srcset', dataSrcsetValue);
+                    img.removeAttribute('datalate-srcset');
+            });
+            }
+        }, 1000);
+    });
+</script>
+
+<script>
+    var site_nav_link_burger = true;
+    var site_search = true;
+    var site_cart = true;
+    document.addEventListener("DOMContentLoaded", function() {
+        var icon_menu = document.querySelector("a.mobile_nav.dropdown_link div");
+        var icon_menu_1 = document.querySelector(".top-bar--right a.icon-search.dropdown_link");
+        var icon_menu_2 = document.querySelector(".cart-container a.icon-bag.mini_cart");
+        icon_menu.addEventListener("click", function() {
+            if(site_nav_link_burger) {
+                event.preventDefault();
+                site_nav_link_burger = false;
+            }
+        });
+        icon_menu_1.addEventListener("click", function() {
+            if(site_search) {
+                event.preventDefault();
+                site_search = false;
+            }
+        });
+        icon_menu_2.addEventListener("click", function() {
+            if(site_cart) {
+                event.preventDefault();
+                site_cart = false;
+            }
+        });
+    })
+</script>
+<script type="lazyload_int">
+setInterval(function() {
+    var lazyScript = document.querySelectorAll("script[type=lazyload_int]");
+    for (i = 0; i < lazyScript.length; i++) {
+        var script_element = document.createElement("script");
+        script_element.src = lazyScript[i].getAttribute("data-src");
+        lazyScript[i].parentNode.insertBefore(script_element, lazyScript[i]);
+        lazyScript[i].parentNode.removeChild(lazyScript[i]);
+    }
+}, 1000);
+</script>
+<script>
+function checkAndResizeSlider() {
+    var slideclass = document.querySelector(".flickity-enabled");
+    if (slideclass) {
+            document.querySelectorAll('.flickity-enabled').forEach(function(element) {
+            if (typeof Flickity !== 'undefined' && Flickity.data(element)) {
+                Flickity.data(element).resize();
+                }
+            });
+        clearInterval(checkInterval);
+    }
+}
+var checkInterval = setInterval(checkAndResizeSlider, 1000);
+window.addEventListener('scroll', checkAndResizeSlider);
+</script>
+{% if template contains 'collection' %}
+<script>
+function removeOpenAttribute() {
+  var detailsElement = document.querySelector('.sidebar details.sidebar-block');
+    if (window.innerWidth <= 767) {
+        if (detailsElement) {
+            detailsElement.removeAttribute('open');
+          }
+    }
+}
+ removeOpenAttribute();
+</script>
+  {% endif %}
+{% if template contains 'product' %}
+  <script>
+        var checkedRadio = document.querySelector("input[type='radio']:checked");
+    
+    var check_qty = checkedRadio ? checkedRadio.getAttribute("data-var-avail") : null;
+    
+    if (check_qty !== null && parseFloat(check_qty) <= 0) {
+        document.querySelector(".tooltip-smg").classList.remove("hide");
+    } else {
+        document.querySelector(".tooltip-smg").classList.add("hide");
+    }
+  </script>
+  {% endif %}
